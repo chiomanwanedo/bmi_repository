@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/chiomanwanedo/bmi_repository.git'
+               git branch: 'main', url: 'https://github.com/chiomanwanedo/bmi_repository.git'
             }
         }
 
