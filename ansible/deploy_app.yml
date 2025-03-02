@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Clone the application repository
+      git:
+        repo: 'https://github.com/cloudboostauk/webApp-BMI-a.git'
+        dest: /home/ec2-user/bmi-app
+
+    - name: Start the Flask app
+      shell: |
+        cd /home/ec2-user/bmi-app
+        python3 app.py

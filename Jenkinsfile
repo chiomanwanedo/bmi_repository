@@ -18,15 +18,16 @@ pipeline {
             }
         }
 
-        stage('Terraform Plan') {
-            steps {
-                sh 'terraform plan'
-            }
-        }
-
         stage('Terraform Apply') {
             steps {
                 sh 'terraform apply -auto-approve'
+            }
+        }
+
+        stage('Run Ansible Playbooks') {
+            steps {
+                sh 'ansible-playbook -i inventory install_dependencies.yml'
+                sh 'ansible-playbook -i inventory deploy_app.yml'
             }
         }
     }

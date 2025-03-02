@@ -1,0 +1,3 @@
+[webservers]
+18.175.114.103 ansible_ssh_user=ec2-user ansible_ssh_private_key_file=~/.ssh/chioma_keypair.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+18.134.156.210 ansible_ssh_user=ec2-user ansible_ssh_private_key_file=~/.ssh/chioma_keypair.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
