@@ -3,6 +3,7 @@ resource "aws_db_instance" "bmi_rds" {
   engine              = "mysql"
   engine_version      = "8.0.35"
   instance_class      = "db.t3.micro"
+  identifier          = "terraform-20250302113321253100000002"
   db_name             = var.db_name
   username           = var.db_username
   password           = var.db_password

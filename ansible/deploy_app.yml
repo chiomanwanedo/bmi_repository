@@ -1,12 +1,29 @@
-- hosts: all
+---
+- name: Deploy BMI Calculator Web App  # ✅ Added play name
+  hosts: all
   become: true
   tasks:
     - name: Clone the application repository
-      git:
+      ansible.builtin.git:
         repo: 'https://github.com/cloudboostauk/webApp-BMI-a.git'
         dest: /home/ec2-user/bmi-app
+        version: main
 
-    - name: Start the Flask app
-      shell: |
+    - name: Install dependencies
+      ansible.builtin.pip:
+        name: flask
+        executable: pip3
+
+    - name: Ensure app.py is executable
+      ansible.builtin.file:
+        path: /home/ec2-user/bmi-app/app.py
+        mode: '0755'
+
+    - name: Start the Flask application
+      ansible.builtin.shell: |
         cd /home/ec2-user/bmi-app
-        python3 app.py
+        nohup python3 app.py > app.log 2>&1 &
+      args:
+        chdir: /home/ec2-user/bmi-app
+      register: flask_service_status
+      changed_when: "'running' not in flask_service_status.stdout"
